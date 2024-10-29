@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airplane Mode Artwork</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .slider-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 80%;
+            height: 20px;
+            background: #ddd;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+        .slider:before {
+            content: '✈️'; /* Airplane emoji as slider handle */
+            font-size: 24px;
+            position: absolute;
+            left: calc(50% - 12px);
+            top: 5px;
+            transition: left 0.2s ease;
+        }
+        .iframe-container {
+            display: none; /* Hidden by default */
+        }
+        iframe {
+            width: 80%;
+            height: 500px;
+            border: none;
+            margin-top: 20px;
+        }
+        audio {
+            margin-top: 20px;
+            display: block;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Airplane Mode Artwork</h1>
+
+    <div class="slider-container">
+        <input type="range" class="slider" id="airplaneModeSlider" min="0" max="1" step="1">
+    </div>
+
+    <div class="iframe-container" id="iframeContainer">
+        <iframe src="URL_OF_YOUR_SCREEN_RECORDING.mp4" allowfullscreen></iframe>
+        <audio controls>
+            <source src="recording.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        const slider = document.getElementById('airplaneModeSlider');
+        const iframeContainer = document.getElementById('iframeContainer');
+
+        slider.addEventListener('input', function() {
+            if (this.value == 1) {
+                iframeContainer.style.display = 'block'; // Show iframe and audio when slider is toggled
+            } else {
+                iframeContainer.style.display = 'none'; // Hide it if slider is not toggled
+            }
+        });
+    </script>
+
+</body>
+</html>
