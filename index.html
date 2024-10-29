@@ -15,29 +15,49 @@
         h1 {
             margin-bottom: 20px;
         }
-        .slider-container {
+        .toggle-container {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 20px;
         }
-        .slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 80%;
-            height: 20px;
-            background: #ddd;
-            border-radius: 5px;
-            outline: none;
-            cursor: pointer;
+        .toggle {
+            position: relative;
+            width: 60px;
+            height: 34px;
         }
-        .slider:before {
-            content: '✈️'; /* Airplane emoji as slider handle */
-            font-size: 24px;
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-label {
             position: absolute;
-            left: calc(50% - 12px);
-            top: 5px;
-            transition: left 0.2s ease;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: background-color 0.4s;
+        }
+        .toggle-label:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.4s;
+        }
+        input:checked + .toggle-label {
+            background-color: #4caf50;
+        }
+        input:checked + .toggle-label:before {
+            transform: translateX(26px);
         }
         .iframe-container {
             display: none; /* Hidden by default */
@@ -59,12 +79,23 @@
 
     <h1>Airplane Mode Artwork</h1>
 
-    <div class="slider-container">
-        <input type="range" class="slider" id="airplaneModeSlider" min="0" max="1" step="1">
+    <p>
+        As we embark on our journeys through the skies, we often believe that activating "airplane mode" disconnects us from the digital world and shields our privacy. However, this artwork, titled "Airplane Mode," invites you to explore the illusion of disconnection.
+
+        In this piece, you will hear a familiar flight safety announcement while witnessing the experience of logging onto airplane WiFi, only to confront a cookie consent banner that limits your options and subtly tracks your online presence.
+
+        Click the toggle switch below to simulate activating "airplane mode" and reveal the hidden layers of surveillance that persist even at cruising altitude.
+    </p>
+
+    <div class="toggle-container">
+        <label class="toggle">
+            <input type="checkbox" id="airplaneModeToggle">
+            <span class="toggle-label"></span>
+        </label>
     </div>
 
     <div class="iframe-container" id="iframeContainer">
-        <iframe src="URL_OF_YOUR_SCREEN_RECORDING.mp4" allowfullscreen></iframe>
+        <iframe src="screenrecording.mp4" allowfullscreen></iframe>
         <audio controls>
             <source src="recording.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
@@ -72,14 +103,24 @@
     </div>
 
     <script>
-        const slider = document.getElementById('airplaneModeSlider');
+        const toggle = document.getElementById('airplaneModeToggle');
         const iframeContainer = document.getElementById('iframeContainer');
+        const audioElement = iframeContainer.querySelector('audio');
 
-        slider.addEventListener('input', function() {
-            if (this.value == 1) {
-                iframeContainer.style.display = 'block'; // Show iframe and audio when slider is toggled
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                iframeContainer.style.display = 'block'; // Show iframe and audio when toggle is on
+                audioElement.play(); // Start playing audio
+                const iframe = iframeContainer.querySelector('iframe');
+                const videoElement = iframe.contentWindow.document.querySelector('video'); // Get the video element inside the iframe
+
+                if (videoElement) {
+                    videoElement.play(); // Start playing video if it exists
+                }
             } else {
-                iframeContainer.style.display = 'none'; // Hide it if slider is not toggled
+                iframeContainer.style.display = 'none'; // Hide it if toggle is off
+                audioElement.pause(); // Pause audio
+                audioElement.currentTime = 0; // Reset audio to the start
             }
         });
     </script>
