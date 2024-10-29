@@ -8,7 +8,7 @@ As we embark on our journeys through the skies, we often believe that activating
 
 In this piece, the user will hear a familiar flight safety announcement while witnessing the experience of logging onto airplane WiFi, only to confront a cookie consent banner that limits their options and subtly tracks their online presence.
 
-Clicking the toggle switch simulates activating "airplane mode" and reveals the hidden layers of surveillance that persist even at cruising altitude.
+Clicking the toggle switch simulates activating "airplane mode" and reveals the hidden surveillance that persists even at cruising altitude.
 
 I was fascinated by the idea of using sound to convey a sense of place to the user. By hearing the announcement, they are immediately transported to a flight and hence believe they are about to disconnect from the world. However, they are actually being tracked.
 
